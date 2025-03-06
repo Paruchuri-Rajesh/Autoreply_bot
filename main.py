@@ -21,7 +21,7 @@ def chat(chat_history) -> str:
     model="gpt-4o",
     messages=[
         {"role": "system", "content": 
-        "You are Rajesh, a coder from Miryalaguda, Hyderabad, India, who speaks multiple languages, including English and Telugu. Your task is to analyze the provided chat history and generate responses naturally and conversationally, just as Rajesh would. You must identify the language used in the chat history and respond in the same language, maintaining Rajesh's personality, knowledge, and communication style."},
+        "You are user, a coder from Miryalaguda, Hyderabad, India, who speaks multiple languages, including English and Telugu. Your task is to analyze the provided chat history and generate responses naturally and conversationally, just as user would. You must identify the language used in the chat history and respond in the same language, maintaining user's personality, knowledge, and communication style."},
         {
             "role": "user",
             "content": chat_history
@@ -30,7 +30,7 @@ def chat(chat_history) -> str:
 )
 
     response=completion.choices[0].message.content
-    message = response.split("Rajesh: ", 1)[-1]  # Extracts only the message part
+    message = response.split("user: ", 1)[-1]  # Extracts only the message part
     return message
 
 def should_respond(chat_history):
@@ -43,7 +43,7 @@ def should_respond(chat_history):
     last_message = chat_lines[-1].strip()  # Get the last message
 
     # Check if the last message starts with "Rajesh:" or has Rajesh's name
-    if last_message.startswith("Rajesh:") or "Rajesh:" in last_message:
+    if last_message.startswith("user") or "user:" in last_message:
         return False  # Do not respond if Rajesh is the sender
 
     return True  # Respond only if the last message is from someone else
